@@ -9,6 +9,8 @@
       name="description"
       content="Web site created using create-react-app"
     />
+    <link rel="stylesheet" href="//d5wfroyti11sa.cloudfront.net/prod/client/ts-12.3.6.min.css"/>
+    <script src="//d5wfroyti11sa.cloudfront.net/prod/client/ts-12.3.6.min.js"></script>
     <link rel="apple-touch-icon" href="logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
@@ -24,11 +26,45 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>Triangle App</title>
+    <meta name="ts-app-title" content="Triangle App"/>
+    <link rel="ts-app-icon" href="logo192.png"/>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+
+    <div data-ts="App">
+      <div data-ts="Main">
+        <div data-ts="Content">
+          <div data-ts="Panel">
+            <h1>What triangle is that?</h1>
+            <p><em>Enter the length of each triangle side then select submit, to identify triangle type.</em></p>
+            <form data-ts="Form" id="TriangleForm">
+              <fieldset>
+                <label>
+                  <span> Side X </span>
+                  <input type="number" id="sideX" required pattern="^\s*(\d*[,.]?\d*)\s*$"/>
+                </label>
+                <label>
+                  <span> Side Y </span>
+                  <input type="number" id="sideY" required pattern="^\s*(\d*[,.]?\d*)\s*$"/>
+                </label>
+                <label>
+                  <span> Side Z </span>
+                  <input type="number" id="sideZ" required pattern="^\s*(\d*[,.]?\d*)\s*$"/>
+                </label>
+                <button data-ts="Button" class="ts-primary" type="submit">
+                  <span>Check</span>
+                </button>
+              </fieldset>
+            </form>
+            <div id="TriangleResults">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

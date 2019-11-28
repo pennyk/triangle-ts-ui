@@ -11,3 +11,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.ts-content h1,
+.ts-content p {
+  padding: 0 10px;
+}
+
+.ts-content button {
+  margin-left: 10px;
+}
+
+.ts-form input.ts-field.ts-date:invalid,
+.ts-form input.ts-field.ts-text:invalid {
+  border-color: #bc0000;
+}
