@@ -124,22 +124,22 @@ function displayResults (message) {
 function getType (x, y, z) {
 	let type;
 
-	if ((x === y)||(y === z)) {
-		if (x === z) {
-			// equilateral (3x)
-			type = "equilateral";
-		}
-		else {
-			// isosceles (2x)
-			type = "isosceles";
-		}
+	// Use maths to compare instead of comparison operators
+	// otherwise numbers like 1 vs 1.0 vs 1.00 will get unexpected results
+	let xy = !Math.abs(x - y);
+	let yz = !Math.abs(y - z);
+	let xz = !Math.abs(x - z);
+
+	if (xy && yz && xz) {
+		// equilateral (3 matching sides)
+		type = "equilateral";
 	}
-	else if (x === z) {
-		// isosceles (2x)
+	else if (xy || yz || xz) {
+		// isosceles (2 matching sides)
 		type = "isosceles";
 	}
 	else {
-		// scalene (1x)
+		// scalene (1 side)
 		type = "scalene";
 	}
 
