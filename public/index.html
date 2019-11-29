@@ -41,23 +41,27 @@
             <h1>What triangle is that?</h1>
             <p><em>Enter the length of each triangle side then select submit, to identify triangle type.</em></p>
             <form data-ts="Form" id="TriangleForm">
-              <fieldset>
+              <fieldset id="sideXfieldset">
                 <label>
-                  <span> Side X </span>
+                  <span> Side X<abbr title="Required field" aria-label="required">*</abbr></span>
                   <input type="number" id="sideX" required pattern="^\s*(\d*[,.]?\d*)\s*$"/>
                 </label>
+              </fieldset>
+              <fieldset id="sideYfieldset">
                 <label>
-                  <span> Side Y </span>
+                  <span> Side Y<abbr title="Required field" aria-label="required">*</abbr></span>
                   <input type="number" id="sideY" required pattern="^\s*(\d*[,.]?\d*)\s*$"/>
                 </label>
+              </fieldset>
+              <fieldset id="sideZfieldset">
                 <label>
-                  <span> Side Z </span>
+                  <span> Side Z<abbr title="Required field" aria-label="required">*</abbr></span>
                   <input type="number" id="sideZ" required pattern="^\s*(\d*[,.]?\d*)\s*$"/>
                 </label>
-                <button data-ts="Button" class="ts-primary" type="submit">
-                  <span>Check</span>
-                </button>
               </fieldset>
+              <button data-ts="Button" class="ts-primary" type="submit">
+                <span>Check</span>
+              </button>
             </form>
             <div id="TriangleResults">
             </div>

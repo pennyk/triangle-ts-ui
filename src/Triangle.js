@@ -1,6 +1,12 @@
 /**
  * Triangle functions
+ * 
+ * The triangle functions help determine the type a triangle is,
+ * based on side lengths provided by the user.
  */
+
+import formErrorTemplate from "./form-error-template.js";
+
 const messages = {
 	equilateral: "The triangle is Equilateral.",
 	isosceles: "The triangle is Isosceles.",
@@ -8,33 +14,95 @@ const messages = {
 	error: "Error: not a valid triangle."
 };
 
+
+/** 
+ * init function
+ * Run this function once the wondow has loaded.
+ */
+function init () {
+	let triangleForm = document.getElementById("TriangleForm");
+	triangleForm.addEventListener("submit", Triangle);
+	let inputs = triangleForm.querySelectorAll("input");
+	inputs.forEach(function (input, index, array) {
+		inputs[index].onblur = triangleInputBlur;
+	});
+}
+
+
+function triangleInputBlur (event) {
+	let errorNotification;
+	let id;
+	if (!validateSide(event.target.value)) {
+		// when invalid, ensure error notification is shown
+		displayValidationMessage(event.target);
+		return true;
+	}
+
+	// in case an error has been corrected,
+	// ensure error notification is hidden
+	if (!event.target.id) {
+		return false;
+	}
+	id = '#' + event.target.id + 'fieldset';
+	errorNotification = document.querySelector(id + ' dl');
+	if (!errorNotification) {
+		return false;
+	}
+	errorNotification.style.display = "none";
+	
+	return true;
+}
+
 function Triangle () {
 	let type;
 	let result;
 	let elX = document.getElementById("sideX");
 	let elY = document.getElementById("sideY");
 	let elZ = document.getElementById("sideZ");
-	let triangleResults = document.getElementById('TriangleResults');
-	console.log('xyz: ', elX.value, elY.value, elZ.value);
 	let x = elX.value;
 	let y = elY.value;
 	let z = elZ.value;
 
 	result = processForm(elX, elY, elZ);
 
-	console.log('result', result);
 	if (!result.status) {
 		// display 'not a triangle' error message
-		triangleResults.innerHTML = messages.error;
-
-		//todo: form error for fields
+		displayResults(messages.error);
+		displayValidationMessage(result.element);
 	}
 	else {
 		type = getType(x, y, z);
 		// display triangle type in results area
-		triangleResults.innerHTML = messages[type];
+		displayResults(messages[type]);
 	}
 
+}
+
+
+function displayValidationMessage (element) {
+	// prepare form error to display with relevant field
+	let target = element.parentElement;
+	let errorNotification = target.querySelector("dl");
+	if(target) {
+		let range = document.createRange();
+		range.selectNode(target);
+		if (!errorNotification) {
+			// display error notification
+			errorNotification = range.createContextualFragment(formErrorTemplate);
+			target.appendChild(errorNotification);
+		}
+		else {
+			// show hidden error notification
+			errorNotification.style.display = "block";
+		}
+	}
+}
+
+function displayResults (message) {
+	let triangleResults = document.getElementById('TriangleResults');
+	triangleResults.innerHTML = '<p>' + message + '</p>';
+	// ensure the updated result message is visible
+	triangleResults.scrollIntoView();
 }
 
 
@@ -128,10 +196,12 @@ function validateSide (length) {
 	return l;
 }
 
-
-module.exports = {
+// Note: do not use module.exports 
+// Even though module.exports works for tests, it breaks functionality in ES6
+export {
 	getType,
+	init,
 	processForm,
 	validateSide
-}
+};
 export default Triangle;

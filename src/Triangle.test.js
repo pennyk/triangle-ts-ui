@@ -1,6 +1,6 @@
 //import React from 'react';
 //import ReactDOM from 'react-dom';
-import Triangle from './Triangle';
+import { Triangle, getType } from './Triangle';
 
 // it('should run tests', () => {
 //   //const div = document.createElement('div');
@@ -8,8 +8,6 @@ import Triangle from './Triangle';
 // });
 
 //describe('', () => {});
-
-let getType = Triangle.getType;
 
 describe('Triangle', () => {
   describe('getType', () => {
