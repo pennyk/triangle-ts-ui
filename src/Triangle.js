@@ -11,8 +11,11 @@ const messages = {
 	equilateral: "The triangle is Equilateral.",
 	isosceles: "The triangle is Isosceles.",
 	scalene: "The triangle is Scalene.",
-	error: "Error: not a valid triangle."
+	error: "Error: not a valid triangle.",
+	errorLength: "The side that is longest must not be larger than the two smaller sides."
 };
+
+let triangleResults;
 
 
 /**
@@ -20,9 +23,11 @@ const messages = {
  * Run this function once the wondow has loaded.
  */
 function init () {
+	let inputs;
 	let triangleForm = document.getElementById("TriangleForm");
 	triangleForm.addEventListener("submit", Triangle);
-	let inputs = triangleForm.querySelectorAll("input");
+	triangleResults = document.getElementById("TriangleResults");
+	inputs = triangleForm.querySelectorAll("input");
 	inputs.forEach(function (input, index, array) {
 		inputs[index].onblur = triangleInputBlur;
 	});
@@ -67,8 +72,10 @@ function Triangle () {
 
 	if (!result.status) {
 		// display 'not a triangle' error message
-		displayResults(messages.error);
-		displayValidationMessage(result.element);
+		displayResults(messages.error + ' ' + messages.errorLength);
+		if (result.element) {
+			displayValidationMessage(result.element);
+		}
 	}
 	else {
 		type = getType(x, y, z);
@@ -80,11 +87,18 @@ function Triangle () {
 
 
 function displayValidationMessage (element) {
+	let target;
+	let errorNotification;
+	let range;
+	if (!element) {
+		// skip when element not provided
+		return false;
+	}
 	// prepare form error to display with relevant field
-	let target = element.parentElement;
-	let errorNotification = target.querySelector("dl");
+	target = element.parentElement;
+	errorNotification = target.querySelector("dl");
 	if(target) {
-		let range = document.createRange();
+		range = document.createRange();
 		range.selectNode(target);
 		if (!errorNotification) {
 			// display error notification
@@ -96,10 +110,11 @@ function displayValidationMessage (element) {
 			errorNotification.style.display = "block";
 		}
 	}
+	return true;
 }
 
 function displayResults (message) {
-	let triangleResults = document.getElementById("TriangleResults");
+	triangleResults = (triangleResults) ? triangleResults : document.getElementById("TriangleResults");
 	triangleResults.innerHTML = "<p>" + message + "</p>";
 	// ensure the updated result message is visible
 	triangleResults.scrollIntoView();
@@ -168,6 +183,8 @@ function processForm (elX, elY, elZ) {
 	// the smallSides total so a comparison can be made
 	smallSides = x + y + z - max;
 	if (smallSides <= max) {
+		// Note: this error doesn't belong to a specific field
+		// so error message will be displayed in results area
 		return {
 			status: false,
 			message: messages.error
