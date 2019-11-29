@@ -1,5 +1,29 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## About the Triangle App
+The Triangle App was created as part of a technical test. It provides information about the triangle, determining what type it is based on the side lengths provided by the user. The type of triangle can be equilateral, isosceles or scalene.
+
+## Design Decisions and Implementation Choices
+ - Uses Tradeshift UI, particularly for form elements
+ - 'Create React App' project template
+ - Form labels and input fields each have a separate line for easier reading/scanning
+ - Only custom CSS for implemented Tradeshift UI components were set up to save time and space, but if I was planning to make the css more future proof, I would add the custom styles for more related components.
+ - I limited the maximum size of the main content area so it would look better on wider displays.
+
+## Known Issues
+ - There is a weird bug where the input field is highlighted as invalid if the value entered is in floating point format (e.g. 1.3) instead of an integer (e.g. 1), with the exception of numbers that have only zeros after the decimal point (1.0, 1.00).
+ - Input field error messages are indented too much (in my opinion).
+
+## Future Tasks and Nice-To-Haves
+ - Add more tests (functions, accessibility)
+ - Refactoring for scalability: if, for example, the app was going to be updated to identify types of four-sided polygons, it would be better to use arrays when processing the input fields, instead of giving them individual IDs (sideX, sideY, sideZ).
+ - The results area (#TriangleResults) doesn't catch the eye at the moment, and could benefit from larger text and a different coloured background.
+ - Trim whitespace from input field to improve chances of accepting 'almost valid' input
+ - Refactor getType if statements to be grouped better by equilateral, isosceles and scalene
+ - Decimal point vs decimal comma
+ - (nice to have) history of triangle results with one entry per line e.g "Scalene: 3,4,5" so user can make comparisons
+ - (nice to have) a graphical to-scale representation of the triangle, with side lengths converte to a percentage so it fits on the screen
+
 ## Available Scripts
 
 In the project directory, you can run:
