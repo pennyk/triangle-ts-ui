@@ -1,6 +1,6 @@
 /**
  * Triangle functions
- * 
+ *
  * The triangle functions help determine the type a triangle is,
  * based on side lengths provided by the user.
  */
@@ -15,7 +15,7 @@ const messages = {
 };
 
 
-/** 
+/**
  * init function
  * Run this function once the wondow has loaded.
  */
@@ -43,13 +43,13 @@ function triangleInputBlur (event) {
 	if (!event.target.id) {
 		return false;
 	}
-	id = '#' + event.target.id + 'fieldset';
-	errorNotification = document.querySelector(id + ' dl');
+	id = "#" + event.target.id + "fieldset";
+	errorNotification = document.querySelector(id + " dl");
 	if (!errorNotification) {
 		return false;
 	}
 	errorNotification.style.display = "none";
-	
+
 	return true;
 }
 
@@ -99,8 +99,8 @@ function displayValidationMessage (element) {
 }
 
 function displayResults (message) {
-	let triangleResults = document.getElementById('TriangleResults');
-	triangleResults.innerHTML = '<p>' + message + '</p>';
+	let triangleResults = document.getElementById("TriangleResults");
+	triangleResults.innerHTML = "<p>" + message + "</p>";
 	// ensure the updated result message is visible
 	triangleResults.scrollIntoView();
 }
@@ -112,20 +112,20 @@ function getType (x, y, z) {
 	if ((x === y)||(y === z)) {
 		if (x === z) {
 			// equilateral (3x)
-			type = 'equilateral';
+			type = "equilateral";
 		}
 		else {
 			// isosceles (2x)
-			type = 'isosceles';
+			type = "isosceles";
 		}
 	}
 	else if (x === z) {
 		// isosceles (2x)
-		type = 'isosceles';
+		type = "isosceles";
 	}
 	else {
 		// scalene (1x)
-		type = 'scalene';
+		type = "scalene";
 	}
 
 	return type;
@@ -196,7 +196,7 @@ function validateSide (length) {
 	return l;
 }
 
-// Note: do not use module.exports 
+// Note: do not use module.exports
 // Even though module.exports works for tests, it breaks functionality in ES6
 export {
 	getType,
