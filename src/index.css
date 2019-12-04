@@ -1,5 +1,6 @@
 .ts-layout > .ts-panel.ts-main {
   margin: 0 auto;
+  max-width: 520px;
 }
 
 .ts-content h1,
