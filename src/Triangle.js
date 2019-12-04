@@ -20,7 +20,9 @@ let triangleResults;
 
 /**
  * init function
- * Run this function once the window has loaded.
+ * Initial set up
+ * 
+ * Note: Run this function once the window has loaded.
  */
 function init () {
 	let inputs;
@@ -34,6 +36,13 @@ function init () {
 }
 
 
+/**
+ * triangleInputBlur
+ * Actions to take once a blur event has been detected on a side input field
+ * 
+ * @param {*} event Event triggered by interaction with a side input field
+ * @return {bool} Status of error display
+ */
 function triangleInputBlur (event) {
 	let errorNotification;
 	let id;
@@ -58,6 +67,11 @@ function triangleInputBlur (event) {
 	return true;
 }
 
+
+/**
+ * Triangle
+ * Uses side input values to process and display results
+ */
 function Triangle () {
 	let type;
 	let result;
@@ -86,6 +100,11 @@ function Triangle () {
 }
 
 
+/**
+ * displayValidationMessage
+ * Function for displaying validation message
+ * @param {*} element Element needing form validation message
+ */
 function displayValidationMessage (element) {
 	let target;
 	let errorNotification;
@@ -113,6 +132,12 @@ function displayValidationMessage (element) {
 	return true;
 }
 
+
+/**
+ * displayResults
+ * Function for displaying results
+ * @param {*} message Message providing triangle type
+ */
 function displayResults (message) {
 	triangleResults = (triangleResults) ? triangleResults : document.getElementById("TriangleResults");
 	triangleResults.innerHTML = "<p>" + message + "</p>";
@@ -121,6 +146,14 @@ function displayResults (message) {
 }
 
 
+/**
+ * getType
+ * Calculates type based on provided side lengths (x, y, z)
+ * @param {*} x Number representing length of side X
+ * @param {*} y Number representing length of side Y
+ * @param {*} z Number representing length of side Z
+ * @returns {string} Type of triangle
+ */
 function getType (x, y, z) {
 	let type;
 
@@ -147,6 +180,14 @@ function getType (x, y, z) {
 }
 
 
+/**
+ * processForm
+ * Validates side input values
+ * @param {*} elX Element containing Side 'X' value
+ * @param {*} elY Element containing Side 'Y' value
+ * @param {*} elZ Element containing Side 'Z' value
+ * @return {Object} JSON containing element (opt), status and message (opt)
+ */
 function processForm (elX, elY, elZ) {
 	let max;
 	let smallSides;
@@ -197,6 +238,12 @@ function processForm (elX, elY, elZ) {
 }
 
 
+/**
+ * validateSide
+ * Validates triangle side length
+ * @param {string} length Length of side being validated
+ * @returns {bool|Number} When invalid: false, when valid: length
+ */
 function validateSide (length) {
 	let l = Number.parseFloat(length);
 
