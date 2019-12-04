@@ -5,7 +5,7 @@
  * based on side lengths provided by the user.
  */
 
-import formErrorTemplate from "./form-error-template.js";
+import formErrorTemplate from "./templates/form-error-template.js";
 
 const messages = {
 	equilateral: "The triangle is Equilateral.",
@@ -20,7 +20,7 @@ let triangleResults;
 
 /**
  * init function
- * Run this function once the wondow has loaded.
+ * Run this function once the window has loaded.
  */
 function init () {
 	let inputs;

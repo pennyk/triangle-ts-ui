@@ -1,6 +1,15 @@
-import { Triangle, getType } from "./Triangle";
+import { getType, validateSide } from "./Triangle";
 
 describe("Triangle", () => {
+  // The following functions need a test DOM/headless browser set up
+  // in order to be able to be tested
+  // @todo init tests
+  // @todo triangleInputBlur tests
+  // @todo Triangle tests
+  // @todo displayValidationMessage tests
+  // @todo displayResults tests
+  // @todo processForm tests
+
   describe("getType", () => {
     it("should accept valid triangle input when valid mixed number types are used", () => {
       expect(getType(1, 1.0, 1.00)).toEqual("equilateral");
@@ -21,11 +30,16 @@ describe("Triangle", () => {
       expect(getType(3,4,5)).toEqual("scalene");
     });
   });
-  // @todo init tests
-  // @todo triangleInputBlur tests
-  // @todo Triangle tests
-  // @todo displayValidationMessage tests
-  // @todo displayResults tests
-  // @todo processForm tests
-  // @todo validateSide tests
+
+  describe("validateSide", () => {
+    it("should return false when not a number", () => {
+      expect(validateSide("invalid example")).toEqual(false);
+    });
+    it("should return false when negative number", () => {
+      expect(validateSide("-1")).toEqual(false);
+    });
+    it("should return length when a positive number", () => {
+      expect(validateSide("1")).toEqual(1);
+    });
+  });
 });
